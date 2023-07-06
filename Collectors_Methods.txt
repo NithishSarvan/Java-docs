@@ -89,6 +89,10 @@
    Integer sum = integers
                 .stream()
                 .collect(Collectors.summingInt(x -> x));
+  or
+  int i2 = integers
+                .stream().mapToInt(x -> x).sum();
+
    // output: 27
 
    ---------- summarizingInt()
