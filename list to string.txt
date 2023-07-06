@@ -1,0 +1,4 @@
+
+
+listString = finalList.stream().map(Object::toString)
+        .collect(Collectors.joining(", "));

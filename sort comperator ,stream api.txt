@@ -1,0 +1,2 @@
+ List<CityListModel.Datum> dataList = items.getData();
+                            dataList.sort((d1, d2) -> d1.getCityName().compareToIgnoreCase(d2.getCityName()));

@@ -1,0 +1,16 @@
+
+
+
+        List<String> t1 = Arrays.asList("a","b","c");
+        List<String> t2 = Arrays.asList("t","u","v");
+        List<String> t3 = Arrays.asList("x","y","z");
+        
+        List<List<String>> allT = Arrays.asList(t1,t2,t3);
+        // [["a","b","c"],["t","u","v"],["x","y","z"]]
+
+        List<String> result = allT.stream()
+              .flatMap(i -> i.stream())
+               . map(p -> p.toUpperCase())
+              .collect(Collectors.toList());
+        
+        // o/p = ["A","B","C","T","U","V","X","Y","Z" ]

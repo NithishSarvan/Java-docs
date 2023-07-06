@@ -1,0 +1,11 @@
+ 
+
+      modelArrayList.stream()
+                .filter(p -> p.getStr_name().contains("s"))
+                .map(p -> {
+                    p.getStr_name().toUpperCase();
+                    p.getStr_status().toLowerCase();
+                    return p;
+                })
+                .collect(Collectors.toList());
+        modelArrayList.forEach(System.out::println);

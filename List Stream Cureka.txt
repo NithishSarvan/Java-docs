@@ -1,0 +1,44 @@
+
+
+
+
+
+      ArrayList<CategoryProdDataModel> filtered = (ArrayList<CategoryProdDataModel>) filter_List.stream()
+
+                      .filter(data -> {
+                         double price = Double.parseDouble((data.getSalePrice()));
+                         return (min <= price && price <= max) || min == 0 && max == 0 || min <= price && max == 0 ;    // return only true or false
+                      })
+
+                     .filter(product -> {
+                          try {
+
+                             String str_dis = product.getDiscount_percentage();
+                             double discount = 0;
+
+                             if (!str_dis.isEmpty()) {
+                                discount = Double.parseDouble((str_dis));
+                             }
+
+                              if (dis_min == 50) {
+                                return dis_min <= discount;
+                             } else {
+                                return (discount >= dis_min && discount <= dis_max) ||
+                                        dis_min == 0 && dis_max == 0;
+                             }
+
+
+                         } catch (Exception e) {
+                            e.printStackTrace();
+                            return false;
+
+                         }
+
+                    })
+
+                    .filter(product -> brand_Id_List.isEmpty() || brand_Id_List.contains(product.getBrand_id()))
+                    .sorted(Comparator.comparingDouble(p -> Double.parseDouble(p.getSalePrice())))
+                    .collect(Collectors.toList());
+
+            menuList.clear();
+            menuList.addAll(filtered);
