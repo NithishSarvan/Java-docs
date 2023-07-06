@@ -1,0 +1,47 @@
+List<String>  Arraylist_final = selectedSpecificDetailList.stream().map(details -> {
+
+            String str_final_product_id = details.getMaterialId();
+            String str_final_qty =details.getQty();
+            String str_final_discount = details.getDiscount();
+            String str_final_amount =details.getAmount();
+            String CustomerProductCode = details.getCustomerProductCode();
+            String str_price_li = details.getPrice();
+            String strUsedBonus = details.getUsedBufferValue();
+            String strUtilzedValue = details.getUtilizedValue();
+            String strAcquisitionValue = details.getAcuqiusitionValue();
+            String strStatusIsBonusUsed = "";
+
+            if (str_final_discount.isEmpty()) {
+                str_final_discount = "0";
+            }
+
+            if (CustomerProductCode.isEmpty()) {
+                CustomerProductCode = " ";
+            }
+
+            if (strUtilzedValue == null ||strUtilzedValue.isEmpty() || strUtilzedValue.equals("0") || strUtilzedValue.equals("0.0")) {
+                strUtilzedValue = " ";
+                strStatusIsBonusUsed ="2";
+            }else {
+                strStatusIsBonusUsed ="1";
+
+            }
+            if (strAcquisitionValue == null ||strAcquisitionValue.isEmpty()|| strAcquisitionValue.equals("0") || strAcquisitionValue.equals("0.0") ) {
+                strAcquisitionValue = " ";
+                strStatusIsBonusUsed ="2";
+
+            }else {
+                strStatusIsBonusUsed ="1";
+
+            }
+
+            return str_final_product_id + "," + str_price_li + "," + str_final_qty + "," +
+                    str_final_discount + "," + str_final_amount + "," + CustomerProductCode +","+strUtilzedValue+","
+                    +strAcquisitionValue+","+strStatusIsBonusUsed ;
+
+        }).collect(Collectors.toList());
+
+
+        //Ordered Items
+        str_final_order = TextUtils.join("~", Arraylist_final); // Convert Arraylist into a String
+        System.out.println("#### str_final_order : " + str_final_order);
