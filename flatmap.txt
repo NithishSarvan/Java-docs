@@ -6,7 +6,7 @@
         List<String> t3 = Arrays.asList("x","y","z");
         
         List<List<String>> allT = Arrays.asList(t1,t2,t3);
-        // [["a","b","c"],["t","u","v"],["x","y","z"]]
+        // [["a","b","c"],["t","u","v"],["x","y","z"],["x","y","z"]]
 
         List<String> result = allT.stream()
               .flatMap(i -> i.stream())
