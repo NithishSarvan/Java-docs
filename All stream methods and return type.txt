@@ -1,0 +1,83 @@
+
+
+
+	 Intermediate operation.	Terminal operators
+
+		filter				foreach
+		map				toArray -> an array containing the elements of this stream
+		mapToInt			collect -> the result of the reduction
+		MapToDouble			min     -> Optional describing the minimum element of this stream, or an empty Optional if the stream is empty
+		sorted				max     -> Optinal max element
+		flatmap				anymatch-> true if any elements of the stream match the provided predicate, otherwise false
+		flatmapToInt			nonematch-> true if either no elements of the stream match the provided predicate or the stream is empty, otherwise false
+		flatmapToDouble			allMatch -> true if either all elements of the stream match the provided predicate or the stream is empty, otherwise false
+		flatmapTOLong			count   ->  count of elements in this stream
+		distinct			findFirst-> an Optional describing the first element of this stream, or an empty Optional if the stream is empty
+		peek				findAny  -> an Optional describing some element of this stream, or an empty Optional if the stream is empty
+		limit				concat   -> the concatenation of the two input streams
+		skip	                        reduce -> the result of the reduction
+
+                //Returns:the new stream
+         -------------------------------------------------------------------
+
+
+       Collectors methods
+	
+	1. averagingDouble, averagingInt, averagingLong
+	2. counting
+	3. groupingBy
+	4. joining("~")
+	5. mapping
+	6. maxBy(Comparator)
+	7. minBy(")
+	8. partitioningBy
+	9. toCollection
+	10.toList
+	11.toMap
+	12.toSet
+	
+
+--- eg 
+    Map<Boolean, List<Integer>> partitionedNumbers = numbers.stream()
+                .collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+        List<Integer> evenNumbers = partitionedNumbers.get(true);
+        List<Integer> oddNumbers = partitionedNumbers.get(false);
+
+    // Even numbers: [2, 4, 6, 8, 10]
+       Odd numbers: [1, 3, 5, 7, 9]
+
+
+----- eg 
+     Map<Integer, List<String>> namesByLength = names.stream()
+                .collect(Collectors.groupingBy(String::length));
+
+        // Print the groups
+        namesByLength.forEach((length, group) -> {
+            System.out.println("Names with length " + length + ": " + group);
+        });
+
+    // Names with length 3: [John, Eve]
+       Names with length 4: [Jane, Adam, Mike]
+
+
+-----eg
+            IntSummaryStatistics stats = numbers.stream()
+                .collect(Collectors.summarizingInt(Integer::intValue));
+
+        System.out.println("Count: " + stats.getCount());
+        System.out.println("Sum: " + stats.getSum());
+        System.out.println("Minimum: " + stats.getMin());
+        System.out.println("Maximum: " + stats.getMax());
+        System.out.println("Average: " + stats.getAverage());
+
+        // Count: 10
+           Sum: 55
+           Minimum: 1
+           Maximum: 10
+           Average: 5.5
+
+
+
+	
+           

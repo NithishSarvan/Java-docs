@@ -1,0 +1,99 @@
+		
+
+
+    Map<Integer, String> filteredMap = map.entrySet()
+       					.stream()
+        				.filter(entry -> entry.getValue().startsWith("A"))
+       					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		 // Output: {1=Apple}
+
+ -----------------------------------------------------------------------------------------------------------
+
+     List<User> users = List.of(new User(1L, "Andrew", 23),
+            new User(2L, "Billy", 42),
+            new User(3L, "David", 29),
+            new User(4L, "Charlie", 30),
+            new User(5L, "Andrew", 18),
+            new User(6L, "Charlie", 19));
+ 
+	Map<Long, String> map = users.stream()
+            .collect(Collectors.toMap(User::getId, User::getName));
+
+      // {1=Andrew, 2=Billy, 3=David, 4=Charlie, 5=Andrew, 6=Charlie}
+
+
+     It throws IllegalStateException which is expected since key of a Map should be unique
+
+
+	Map<String, Integer> idValueMap = users.stream()
+    .collect(Collectors.toMap(User::getName, User::getAge, (oldValue, newValue) -> oldValue));
+
+
+   ----> ConcurrentHashMap, LinkedHashMap, and TreeMap from streams
+
+	 Map<String, Integer> concurrentHashMap = users.stream()
+            .collect(Collectors.toMap(User::getName, User::getAge, (o1, o2) -> o1, ConcurrentHashMap::new));
+
+         Map<String, Integer> linkedHashMap = users.stream()
+            .collect(Collectors.toMap(User::getName, User::getAge, (o1, o2) -> o1, LinkedHashMap::new));
+
+         Map<String, Integer> treeMap = users.stream()
+            .collect(Collectors.toMap(User::getName, User::getAge, (o1, o2) -> o1, TreeMap::new));     
+
+   ------> Collectors.groupingBy()
+
+	Map<String, List<User>> groupByName = users.stream()
+            .collect(Collectors.groupingBy(User::getName));
+
+     // {Billy=[User{id=2, name='Billy', age=42}], 
+     //  Andrew=[User{id=1, name='Andrew', age=23}, User{id=5, name='Andrew', age=18}],
+     //  Charlie=[User{id=4, name='Charlie', age=30}, User{id=6, name='Charlie', age=19}], 
+     //  David=[User{id=3, name='David', age=29}]}
+
+
+    ----------> sorted
+
+  .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+
+
+    ------------> Both sort by key and value
+
+       Comparator<Map.Entry<Long, String>> valueComparator = Map.Entry.comparingByValue();
+       Comparator<Map.Entry<Long, String>> keyComparator = Map.Entry.comparingByKey(Comparator.reverseOrder());
+
+      Map<Long, String> sortByValueThenKey = users.stream()
+    		.collect(Collectors.toMap(User::getId, User::getName))
+    		.entrySet()
+    		.stream()
+    	--->	.sorted(valueComparator.thenComparing(keyComparator))
+    		.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (o1, o2) -> o1, LinkedHashMap::new));
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
