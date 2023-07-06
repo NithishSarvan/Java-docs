@@ -1,0 +1,65 @@
+listFinalCbm = IntStream.range(0,selectedSpecificDetailList.size()).mapToObj(j ->{
+
+            String strRowId = String.valueOf(j);
+            String strMaterialId = selectedSpecificDetailList.get(j).getMaterialId();
+            String strMCode = selectedSpecificDetailList.get(j).getMaterialCode();
+            String strMName = selectedSpecificDetailList.get(j).getMaterialName();
+            String str_price_li = selectedSpecificDetailList.get(j).getPrice();
+            String str_final_qty = selectedSpecificDetailList.get(j).getQty();
+            String str_Discount = selectedSpecificDetailList.get(j).getDiscount();
+            String str_AMount = selectedSpecificDetailList.get(j).getAmount();
+            String str_CusProdCode = selectedSpecificDetailList.get(j).getCustomerProductCode();
+            String str_cbm = selectedSpecificDetailList.get(j).getCbm();
+            String str_Addition = selectedSpecificDetailList.get(j).getAddition();
+            String str_Commisiion =selectedSpecificDetailList.get(j).getCommission();
+            String str_Freight = selectedSpecificDetailList.get(j).getFreight();
+            String str_Insurance = selectedSpecificDetailList.get(j).getInsurance();
+            String str_EditStatus =selectedSpecificDetailList.get(j).getEditStatus();
+            NewEnquiryDetailsModel.EnqDetail enqDetail = selectedSpecificDetailList.get(j).getEnqDetail();
+            String str_UsedBufferValue = selectedSpecificDetailList.get(j).getUsedBufferValue();
+            String str_UtilizedValue = selectedSpecificDetailList.get(j).getUtilizedValue();
+            String str_AcquisitionValue = selectedSpecificDetailList.get(j).getAcuqiusitionValue();
+
+            if (str_Addition == null || str_Addition.isEmpty()) {
+                str_Addition = "0";
+            }
+            if (str_Commisiion == null || str_Commisiion.isEmpty()) {
+                str_Commisiion = "0";
+            }
+            if (str_Freight == null || str_Freight.isEmpty()) {
+                str_Freight = "0";
+            }
+            if (str_Insurance == null || str_Insurance.isEmpty()) {
+                str_Insurance = "0";
+            }
+            if (str_Discount == null || str_Discount.isEmpty()) {
+                str_Discount = "0";
+            }
+            if (str_CusProdCode == null || str_CusProdCode.isEmpty()) {
+                str_CusProdCode = " ";
+            }
+            if (str_cbm == null || str_cbm.isEmpty()) {
+                str_cbm = " ";
+            }
+
+
+            return (new CbmCustomAddModel(strRowId,
+                    strMaterialId, strMCode,
+                    strMName, str_price_li,
+                    str_final_qty,
+                    str_Discount,
+                    str_AMount,
+                    str_CusProdCode,
+                    str_cbm,
+                    str_Addition,
+                    str_Commisiion,
+                    str_Freight,
+                    str_Insurance,
+                    str_EditStatus,
+                    enqDetail,
+                    str_UsedBufferValue,
+                    str_UtilizedValue,
+                    str_AcquisitionValue
+            ));
+
+        }).collect(Collectors.toList());
