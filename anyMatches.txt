@@ -1,0 +1,16 @@
+   for (SaleOrderAddedModel data : selectedSpecificDetailList) {
+
+                if (data.getMaterialId().equals(materialId)) {
+                    IS_ALREADY_PRODUCT_EXIST = true;
+                    break;
+                }
+            }
+
+
+// both are same
+
+   IS_ALREADY_PRODUCT_EXIST = selectedSpecificDetailList.stream()
+							.anyMatch(data -> data.getMaterialId().equals(materialId));
+
+ isEdited = selectedSpecificDetailList.stream()
+				      .anyMatch(data -> data.getEditStatus() == null || data.getEditStatus().equals("MustEdited"));

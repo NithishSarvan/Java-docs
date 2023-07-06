@@ -1,0 +1,141 @@
+
+
+  List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+  integers.stream().map(x -> x*x).collect(Collectors.toSet());
+  // output: [1,4,9,16,25,36]
+
+  ---------------- toCollection()
+
+  List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+  integers
+    .stream()
+    .filter(x -> x >2)
+    .collect(Collectors.toCollection(LinkedList::new));
+   // output: [3,4,5,6,6]
+
+
+  ---------- Counting()
+
+  List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+  Long collect = integers
+                   .stream()
+                   .filter(x -> x <4)
+                   .collect(Collectors.counting());
+  // output: 3
+
+
+   ------------ minBy()
+
+   List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+   List<String> strings = Arrays.asList("alpha","beta","gamma");
+
+   integers
+    .stream()
+    .collect(Collectors.minBy(Comparator.naturalOrder()))
+    .get();
+   // output: 1
+
+    strings
+   .stream()
+   .collect(Collectors.minBy(Comparator.naturalOrder()))
+   .get();
+   // output: alpha
+ 
+    .collect(Collectors.minBy(Comparator.reverseOrder()))
+    .get();
+   // output: 6
+
+
+    ---------- maxBy()
+
+    List<String> strings = Arrays.asList("alpha","beta","gamma");
+   strings
+   .stream()
+   .collect(Collectors.maxBy(Comparator.naturalOrder()))
+   .get();
+   // output: gamma
+
+
+  ------ averagingInt();
+
+  List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+
+  Double d2 = integers
+   		.stream()
+    		.collect(Collectors.averagingInt(x -> x));
+
+   // output: 4.14
+
+  or 
+   .collect(Collectors.averagingInt(x -> x*2));
+
+   // output: 7.714285714285714
+
+
+  ------ toMap();
+
+  List<String> strings = Arrays.asList("alpha","beta","gamma");
+  Map<String,Integer> map = strings
+                            .stream()
+                            .collect(Collectors.toMap(Function.identity(),String::length));
+   
+   // output: {alpha=5, beta=4, gamma=5}
+
+   Function.identity() is pointing to the list value,
+
+   -------- summingInt()
+
+   List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+   Integer sum = integers
+                .stream()
+                .collect(Collectors.summingInt(x -> x));
+   // output: 27
+
+   ---------- summarizingInt()
+
+    List<Integer> integers = Arrays.asList(1,2,3,4,5,6,6);
+    IntSummaryStatistics stats = integers
+                                   .stream()
+                                   .collect(Collectors.summarizingInt(x -> x ));
+
+    //output: IntSummaryStatistics{count=7, sum=27, min=1, average=3.857143, max=6}
+
+
+   ------.groupingBy()
+
+   List<String> strings = Arrays.asList("alpha","beta","gamma");
+
+       Map<Integer, LinkedList<String>> collect1 = strings
+                     .stream()
+                     .collect(Collectors.groupingBy(String::length, Collectors.toCollection(LinkedList::new)));
+     
+      // output: {4=[beta], 5=[alpha, gamma]}
+
+   
+
+
+   
+
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,10 @@
+for (int i = 0; i < spin.getAdapter().getCount(); i++) {
+            if (spin.getAdapter().getItem(i).toString().contains(text)) {
+                spin.setSelection(i);
+            }
+        }
+
+        IntStream.range(0, spin.getAdapter().getCount())
+                .filter(i -> spin.getAdapter().getItem(i).toString().contains(text))
+                .findFirst()
+                .ifPresent(spin::setSelection);

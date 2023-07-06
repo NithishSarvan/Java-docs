@@ -1,0 +1,7 @@
+  for (AddPhotosModel s : addPhotosList) {
+                Arraylist_image_encode.add(s.getEncode_string());
+            }
+
+            Arraylist_image_encode =(ArrayList<String>) addPhotosList.stream()
+						.map(AddPhotosModel::getEncode_string)
+						.collect(Collectors.toList());
